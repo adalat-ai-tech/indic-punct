@@ -33,7 +33,7 @@ def load_file(file_path: str) -> List[str]:
     Returns: flat list of string
     """
     res = []
-    with open(file_path, 'r') as fp:
+    with open(file_path, 'r', encoding='utf-8') as fp:
         for line in fp:
             if line:
                 res.append(line.strip())
@@ -49,7 +49,7 @@ def write_file(file_path: str, data: List[str]):
         data: list of string
         
     """
-    with open(file_path, 'w') as fp:
+    with open(file_path, 'w', encoding='utf-8') as fp:
         for line in data:
             fp.write(line + '\n')
 
