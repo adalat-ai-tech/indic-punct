@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # NEMO_NON_BREAKING_SPACE = u"\u00A0"
 
     hindi_digit_file = './data/numbers/digit.tsv'
-    with open(hindi_digit_file) as f:
+    with open(hindi_digit_file, encoding='utf-8') as f:
         digits = f.readlines()
     hindi_digits = ''.join([line.split()[-1] for line in digits])
     hindi_digits_with_zero = "०" + hindi_digits
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     file_path = './sample_input.txt'
 
-    with open(file_path) as f:
+    with open(file_path, encoding='utf-8') as f:
         lines = f.readlines()
 
     print("Printing output lines \n")
