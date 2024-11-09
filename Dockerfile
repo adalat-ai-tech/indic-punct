@@ -25,9 +25,8 @@ RUN python --version && \
     conda --version
 
 # setup repo
-RUN git clone https://github.com/adalat-ai-tech/indic-punct.git
-RUN cd indic-punct/
-RUN git checkout deployment
+RUN git clone --branch deployment https://github.com/adalat-ai-tech/indic-punct.git
+WORKDIR /indic-punct
 
 # install dependencies
 RUN bash install.sh
@@ -39,5 +38,13 @@ RUN pip install huggingface-hub==0.23.2
 RUN pip install transformers==4.40.0
 RUN conda install -c conda-forge gcc=12.1.0
 
+# Expose the port the app runs on
+EXPOSE 8080
 
-CMD ["python"]
+# Define environment variable to prevent Python from buffering stdout/stderr
+# and writing byte code to file
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Run the server with uWSGI, binding to all interfaces on the PORT environment variable
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

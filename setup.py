@@ -30,7 +30,10 @@ setup(
 #        'tokenizers>=0.9.4',
 #        'torchvision>=0.8.2',
 #        'transformers>=4.0.1',
-        'indic-nlp-library>=0.81'
+        'indic-nlp-library>=0.81',
+        'fastapi==0.115.4',
+        'uvicorn==0.32.0',
+        'gunicorn==23.0.0'
     ],
     classifiers=[
         # How mature is this project? Common values are
