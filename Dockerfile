@@ -24,11 +24,13 @@ RUN python --version && \
     pip --version && \
     conda --version
 
-# setup repo
 RUN git clone --branch deployment https://github.com/adalat-ai-tech/indic-punct.git
 WORKDIR /indic-punct
 
-# install dependencies
+# pin breaking dependencies
+RUN pip install "numpy<2"
+
+# install other dependencies
 RUN bash install.sh
 RUN python setup.py bdist_wheel
 RUN pip install -e .
@@ -46,5 +48,5 @@ EXPOSE 8080
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Run the server with uWSGI, binding to all interfaces on the PORT environment variable
+# Run the server with uvicorn, binding to all interfaces on port 8080
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
